@@ -2,7 +2,7 @@ import React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom"; // Importe useNavigate
+import { useNavigate } from "react-router-dom";
 
 import Box from "../../components/box/Box";
 import {
@@ -25,7 +25,7 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 const LoginPage: React.FC = () => {
-  const navigate = useNavigate(); // Use useNavigate para navegação
+  const navigate = useNavigate();
 
   const {
     register,
@@ -37,7 +37,7 @@ const LoginPage: React.FC = () => {
   });
 
   const onSubmit = () => {
-    navigate("/home"); // Navega para a rota /home após o login ser realizado
+    navigate("/home");
   };
 
   return (
@@ -63,10 +63,10 @@ const LoginPage: React.FC = () => {
               {...register("password")}
             />
             {errors.password && <Error>{errors.password.message}</Error>}
+            <Button type="submit" disabled={!isValid}>
+              Continuar
+            </Button>
           </Form>
-          <Button type="submit" disabled={!isValid}>
-            Continuar
-          </Button>
         </Box>
       </LoginContainer>
     </div>
