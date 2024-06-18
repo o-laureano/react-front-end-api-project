@@ -6,7 +6,7 @@ export const StyledButton = styled.button`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  background: #005ac3;
+  background: #1db954;
   border-radius: 8px;
   display: flex;
   height: 48px;
