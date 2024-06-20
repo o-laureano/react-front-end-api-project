@@ -34,6 +34,15 @@ export const LoginContainer = styled.div`
   height: 100vh;
 `;
 
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+`;
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -53,6 +62,6 @@ export const Label = styled.label`
 `;
 
 export const Error = styled.div`
-  color: red;
-  font-size: 12px;
+  color: #ff4d4f;
+  font-size: 14px;
 `;

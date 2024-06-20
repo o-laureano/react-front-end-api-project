@@ -11,6 +11,7 @@ import {
   Form,
   H1,
   Header,
+  InputContainer,
   Label,
   LoginContainer,
 } from "./Login.styles";
@@ -49,20 +50,24 @@ const LoginPage: React.FC = () => {
             <Description>Seja bem vindo ao nosso app!</Description>
           </Header>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <Label htmlFor="email">E-mail</Label>
-            <Input
-              type="email"
-              placeholder="Digite seu e-mail"
-              {...register("email")}
-            />
-            {errors.email && <Error>{errors.email.message}</Error>}
-            <Label htmlFor="password">Senha</Label>
-            <Input
-              type="password"
-              placeholder="Digite sua senha"
-              {...register("password")}
-            />
-            {errors.password && <Error>{errors.password.message}</Error>}
+            <InputContainer>
+              <Label htmlFor="email">E-mail</Label>
+              <Input
+                type="email"
+                placeholder="Digite seu e-mail"
+                {...register("email")}
+              />
+              {errors.email && <Error>{errors.email.message}</Error>}
+            </InputContainer>
+            <InputContainer>
+              <Label htmlFor="password">Senha</Label>
+              <Input
+                type="password"
+                placeholder="Digite sua senha"
+                {...register("password")}
+              />
+              {errors.password && <Error>{errors.password.message}</Error>}
+            </InputContainer>
             <Button type="submit" disabled={!isValid}>
               Continuar
             </Button>

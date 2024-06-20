@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StyledInput = styled.input`
+  all: unset;
+
   display: flex;
   height: 40px;
   padding: 0 16px;
@@ -20,4 +22,5 @@ export const StyledInput = styled.input`
   &:focus {
     border-color: #005ac3;
     outline: none;
+  }
 `;
