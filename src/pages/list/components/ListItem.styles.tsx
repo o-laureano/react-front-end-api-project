@@ -22,10 +22,11 @@ export const ItemImage = styled.img`
   gap: 8px;
 `;
 
-export const ItemInfo = styled.img`
+export const ItemInfo = styled.div`
   display: flex;
   padding: 8px 0px;
   justify-content: center;
   align-items: center;
   align-self: stretch;
+  flex-direction: column;
 `;

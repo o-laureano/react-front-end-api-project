@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { getArtistData } from "../../services/spotifyApi";
 import Dropdown from "../../components/dropdown/Dropdown";
 import Pagination from "../../components/pagination/Pagination";
 import { ActionsContainer, ListRow, PageContainer } from "./List.styles";
-import { ItemCard } from "./components/ListItem.styles";
+import { ItemCard, ItemImage, ItemInfo } from "./components/ListItem.styles";
+import { getAlbumsByArtistName } from "../../services/spotifyApi";
 
 const ListPage: React.FC = () => {
-  const [artistData, setArtistData] = useState<any>(null);
+  const [albums, setAlbums] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getArtistData("4Z8W4fKeB5YxbusRsdQVPb");
-        setArtistData(data);
+        const data = await getAlbumsByArtistName("Grateful Dead");
+        setAlbums(data);
       } catch (err) {
         setError(err.message);
       }
@@ -23,11 +23,11 @@ const ListPage: React.FC = () => {
   }, []);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Erro: {error}</div>;
   }
 
-  if (!artistData) {
-    return <div>Loading...</div>;
+  if (albums.length === 0) {
+    return <div>Carregando...</div>;
   }
   return (
     <PageContainer>
@@ -36,16 +36,18 @@ const ListPage: React.FC = () => {
         <Pagination />
       </ActionsContainer>
       <ListRow>
-        <ItemCard>
-          <h1>{artistData.name}</h1>
-          <p>Followers: {artistData.followers.total}</p>
-          <p>Genres: {artistData.genres.join(", ")}</p>
-          <img
-            src={artistData.images[0].url}
-            alt={artistData.name}
-            width="200"
-          />
-        </ItemCard>
+        {albums.map((album) => (
+          <ItemCard key={album.id}>
+            <ItemImage src={album.images[0].url} alt={album.name} width="200" />
+            <ItemInfo>
+              <h1>{album.name}</h1>
+              <p>
+                {album.artists.map((artist: any) => artist.name).join(", ")}
+              </p>
+              <p>{album.release_date}</p>
+            </ItemInfo>
+          </ItemCard>
+        ))}
       </ListRow>
     </PageContainer>
   );
