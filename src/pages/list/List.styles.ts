@@ -20,7 +20,9 @@ export const ActionsContainer = styled.div`
 
 export const ListRow = styled.div`
   display: flex;
+  width: 100%;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   align-self: stretch;
   gap: 32px;
