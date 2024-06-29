@@ -1,41 +1,15 @@
-import { useEffect, useState } from "react";
+// src/pages/List.tsx
 import Dropdown from "../../components/dropdown/Dropdown";
 import Pagination from "../../components/pagination/Pagination";
 import { ActionsContainer, ListRow, PageContainer } from "./List.styles";
-import {
-  ItemCard,
-  ItemImage,
-  ItemInfo,
-  ItemInfoDescription,
-  ItemInfoHeader,
-} from "./components/ListItem.styles";
-import { getAlbumsByArtistName } from "../../services/spotifyApi";
-
-const itemsPerPage = 8;
+import { useAlbums } from "./List.container";
+import { usePagination } from "../../components/pagination/Pagination.container";
+import ListItem from "./components/ListItem";
 
 const ListPage: React.FC = () => {
-  const [albums, setAlbums] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getAlbumsByArtistName("Grateful Dead");
-        setAlbums(data);
-      } catch (err) {
-        setError(err.message);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const totalPages = Math.ceil(albums.length / itemsPerPage);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  const { albums, error, handleCardClick } = useAlbums("zeze");
+  const { currentPage, totalPages, handlePageChange, paginatedItems } =
+    usePagination(albums.length);
 
   if (error) {
     return <div>Erro: {error}</div>;
@@ -45,8 +19,7 @@ const ListPage: React.FC = () => {
     return <div>Carregando...</div>;
   }
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginationAlbums = albums.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedAlbums = paginatedItems(albums);
 
   return (
     <PageContainer>
@@ -59,19 +32,8 @@ const ListPage: React.FC = () => {
         />
       </ActionsContainer>
       <ListRow>
-        {paginationAlbums.map((album) => (
-          <ItemCard key={album.id}>
-            <ItemImage src={album.images[0].url} alt={album.name} width="200" />
-            <ItemInfo>
-              <ItemInfoHeader>{album.name}</ItemInfoHeader>
-              <ItemInfoDescription>
-                <p>
-                  {album.artists.map((artist: any) => artist.name).join(", ")}
-                </p>
-                <p>Lançamento: {album.release_date}</p>
-              </ItemInfoDescription>
-            </ItemInfo>
-          </ItemCard>
+        {paginatedAlbums.map((album) => (
+          <ListItem key={album.id} album={album} onClick={handleCardClick} />
         ))}
       </ListRow>
     </PageContainer>

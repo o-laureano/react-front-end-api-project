@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/login/Login";
 import ListPage from "./pages/list/List";
-import DetailsPage from "./pages/details/Details";
+import InfoPage from "./pages/info/Info";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/info/:id",
-    element: <DetailsPage />,
+    element: <InfoPage />,
   },
 ]);
 
