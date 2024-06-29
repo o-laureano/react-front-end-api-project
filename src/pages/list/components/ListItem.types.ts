@@ -4,6 +4,13 @@ export interface Album {
   name: string;
   artists: { name: string }[];
   release_date: string;
+  genres: string;
+  tracks: {
+    items: {
+      id: string;
+      name: string;
+      duration_ms: number;
+    }[];
 }
 
 export interface ListItemProps {

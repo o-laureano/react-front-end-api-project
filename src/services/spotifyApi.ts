@@ -53,5 +53,31 @@ export const getAlbumsByArtistName = async (artistName: string) => {
   }
 
   const albumData = await albumsResponse.json();
-  return albumData.items;
+
+  const albums = albumData.items.map((album: any) => ({
+    id: album.id,
+    images: album.images,
+    name: album.name,
+    artists: album.artists,
+    release_date: album.release_date,
+    genres: album.genres,
+  }));
+
+  return albums;
+};
+
+export const getAlbumById = async (id: string) => {
+  const accessToken = await getAccessToken();
+  const response = await fetch(`https://api.spotify.com/v1/albums/${id}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Impossível de buscar os dados do álbum.");
+  }
+
+  const data = await response.json();
+  return data;
 };

@@ -1,9 +1,6 @@
-// src/containers/Pagination.container.ts
 import { useState } from "react";
 
-const itemsPerPage = 8;
-
-export const usePagination = (totalItems: number) => {
+export const usePagination = (totalItems: number, itemsPerPage: number) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -12,9 +9,10 @@ export const usePagination = (totalItems: number) => {
     setCurrentPage(page);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedItems = (items: any[]) =>
-    items.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedItems = (items: any[]) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return items.slice(startIndex, startIndex + itemsPerPage);
+  };
 
   return {
     currentPage,

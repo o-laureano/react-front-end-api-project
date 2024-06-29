@@ -17,6 +17,11 @@ import {
 } from "./Login.styles";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
+import {
+  HeaderBox,
+  HeaderDescription,
+  HeaderLogo,
+} from "../../components/header/logo.styles";
 
 const loginSchema = z.object({
   email: z.string().email("Email inválido"),

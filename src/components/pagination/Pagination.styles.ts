@@ -4,6 +4,7 @@ import { ButtonProps } from "./Pagination.types";
 export const PaginationContainer = styled.div`
   display: flex;
   align-items: center;
+  gap: 16px;
 `;
 
 export const Button = styled.button<ButtonProps>`

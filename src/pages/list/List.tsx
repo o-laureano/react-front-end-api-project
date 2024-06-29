@@ -1,18 +1,35 @@
-// src/pages/List.tsx
-import Dropdown from "../../components/dropdown/Dropdown";
+import React from "react";
 import Pagination from "../../components/pagination/Pagination";
 import { ActionsContainer, ListRow, PageContainer } from "./List.styles";
 import { useAlbums } from "./List.container";
 import { usePagination } from "../../components/pagination/Pagination.container";
 import ListItem from "./components/ListItem";
+import SearchInput from "../../components/searchInput/SearchInput";
+import { useState } from "react";
+import Button from "../../components/button/Button";
+import { useNavigate } from "react-router-dom";
+
+const itemsPerPage = 8;
 
 const ListPage: React.FC = () => {
-  const { albums, error, handleCardClick } = useAlbums("zeze");
+  const [artistName, setArtistName] = useState("gojira");
+  const { albums, error, handleCardClick } = useAlbums(artistName);
+
+  const navigate = useNavigate();
+  const handleRestartApplication = () => {
+    navigate("/");
+  };
+
   const { currentPage, totalPages, handlePageChange, paginatedItems } =
-    usePagination(albums.length);
+    usePagination(albums.length, itemsPerPage);
 
   if (error) {
-    return <div>Erro: {error}</div>;
+    return (
+      <div>
+        Este artista não existe e infelizmente quebrou a aplicação toda kkkkkkk
+        <Button onClick={handleRestartApplication}>Reiniciar aplicação</Button>
+      </div>
+    );
   }
 
   if (albums.length === 0) {
@@ -24,7 +41,7 @@ const ListPage: React.FC = () => {
   return (
     <PageContainer>
       <ActionsContainer>
-        <Dropdown />
+        <SearchInput onSearch={setArtistName} />
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
