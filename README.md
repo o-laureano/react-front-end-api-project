@@ -1,16 +1,13 @@
 # Prints do trabalho
 
 ## Login
-
-![login](src\assets\images\prints\login.png)
+![login](https://github.com/o-laureano/react-front-end-api-project/assets/134964007/5578e127-05d9-41a9-a0ba-d96aeb9f2699)
 
 ## List
-
-![login](src\assets\images\prints\list.png)
+![list](https://github.com/o-laureano/react-front-end-api-project/assets/134964007/b1b2c211-96cd-4bf2-a0a3-4008ca5ea392)
 
 ## Info
-
-![login](src\assets\images\prints\info.png)
+![info](https://github.com/o-laureano/react-front-end-api-project/assets/134964007/f53a7fb7-f299-4960-83a5-ad1c76763046)
 
 # React + TypeScript + Vite
 
